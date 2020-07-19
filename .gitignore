@@ -1,0 +1,5 @@
+.vscode/
+env/
+secret_key.txt
+__pycache__/
+.env

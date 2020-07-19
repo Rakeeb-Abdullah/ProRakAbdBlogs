@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/posts.css') }}">
+    <link rel="stylesheet" href="{{ url_for( 'static',filename='css/bootstrap.css' ) }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/2259b3dc5d.js" crossorigin="anonymous"></script>
+            
+    {% block head %} {% endblock %}
+</head>
+
+<body style="background-image: url(https://www.toptal.com/designers/subtlepatterns/patterns/type.png);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">ProRakAbd BLOGS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/posts">All Posts</a>
+            </li>
+            <li class="nav-item active dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Contact Us
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="https://twitter.com/rakeeb_abd">Twitter</a>
+                <a class="dropdown-item" href="https://instagram.com/rakeeb_abd">Instagram</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="https://github.com/Rakeeb-Abdullah">Github</a>
+              </div>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
+          {% if current_user.is_authenticated %}
+          <div class="btn-group my-2 my-sm-0" role="group" aria-label="Basic example">
+            <a type="button" href="{{ url_for('posts.new_post') }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> New Post</a>
+            <a type="button" href="{{ url_for('users.account') }}" class="btn btn-info"><i class="fas fa-user-circle"></i> Account</a>
+            <a type="button" href="{{ url_for('users.logout') }}" class="btn btn-danger my-2 my-sm-0"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+          </div>
+          {% else %}
+            <div class="btn-group my-2 my-sm-0" role="group" aria-label="Basic example">
+              <a type="button" href="{{ url_for('users.login') }}" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Log In</a>
+              <a type="button" href="{{ url_for('users.register') }}" class="btn btn-info"><i class="fas fa-user-plus"></i> Sign Up</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% with messages=get_flashed_messages(with_categories=(true)) %}
+        {% if messages %}
+          {% for category,message in messages %}
+          <div style="margin: 10px 0px 10px 0px;" class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+        {% block body %} 
+        {% endblock %}
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

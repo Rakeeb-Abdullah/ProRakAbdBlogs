@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Posts By {{user.username}}</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/posts.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="header border-bottom mb-4" style="margin-top: 20px;text-align: center;">
+  <h2 id="post-heading" style="color: white;">{{ user.username }}({{ posts.total }})</h2>
+</div>
+<br>
+  {% for post in posts.items %}
+    <div style="background-color: rgba(0, 0, 0, 0.486);padding: 20px; border-radius: 5px; color: white;width: 75%; margin: auto;">
+      <div style="display: flex;" class="author border-bottom mb-4">
+        <div style="margin-top: 5px;">
+          <img width="40px" class="rounded-circle" src="{{ url_for('static',filename='profile_pics/' + post.author.image_file) }}" alt="">
+        </div>
+        <div style="margin-left: 10px;">
+          <span class="mr-2">By: </span> <a href="{{ url_for('users.user_posts',username=post.author.username) }}"> {{ post.author.username }} </a>  <br> 
+          <small class="text-muted"> On: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+        </div>
+      </div>
+      <h2 style="margin-top: 10px;"><a class="article-title" href="/posts/read_more/{{ post.id }}">{{ post.title }}</a></h2>
+      <br>
+      {% set splitted_list = post.content.split() %}
+      {% set list_lenght = splitted_list |length %}
+      {% set int_list_lenght = list_lenght|int %}
+      {% set short_post = " ".join(splitted_list[0:int_list_lenght // 4]) %}
+      {% if int_list_lenght > 20 %}
+        <p style="white-space:pre-wrap;">{{ short_post }} <a href="/posts/read_more/{{post.id}}"><b> Read More... </b></a> </p>
+      {% else %}
+        <p style="white-space:pre-wrap;">{{ post.content }}</p>
+      {% endif %}
+  
+      <a style="margin-top: 10px; text-align: center;" href="/posts/read_more/{{post.id}}">Read More >></a>
+    </div>
+    <hr>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item {% if posts.page-1==0 %} disabled {% endif %}"><a class="page-link" href="{% if posts.page-1 != 0 %} {{ url_for('posts',page=posts.page-1)}} {% endif %}">Previous</a></li>
+  {% for page_num in posts.iter_pages(left_edge=1, right_edge=1,left_current=1,right_current=2) %}
+      
+  {% if page_num %}
+    {% if posts.page == page_num %}
+        <li class="page-item active"><a class="page-link" href="{{ url_for('users.user_posts',username=user.username,page=page_num) }}">{{ page_num }}</a></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{{ url_for('users.user_posts',username=user.username,page=page_num) }}">{{ page_num }}</a></li>
+    {% endif %}
+  {% else %}
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+  {% endif %}
+  {% endfor %}
+  <li class="page-item {% if posts.has_next == False %} disabled {% endif %}"><a class="page-link" href="{% if posts.has_next %} {{ url_for('users.posts',page=posts.page+1)}} {% endif %}">Next</a></li> 
+  </ul>
+  </nav>
+{% endblock %}

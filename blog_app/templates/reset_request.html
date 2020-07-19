@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Request Reset Password</title>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="register-form" style="color: white;">
+    <form action="" method="POST" style="padding: 15px;">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" style="text-align: center;">
+                <h3>Reset Password</h3>
+            </legend>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}  
+                    {% endif %}
+                </div>
+
+        </fieldset>
+
+        <div class="form-group" style="text-align: center;">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+
+{% endblock %}

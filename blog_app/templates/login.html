@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Log In</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="register-form" style="color: white;">
+    <form action="" method="POST" style="padding: 15px;">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" style="text-align: center;">
+                <h3>Log In</h3>
+            </legend>
+
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}  
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}  
+                    {% endif %}
+                    <small class="text-muted"><a href="{{ url_for('users.reset_request') }}">Forgot Password?</a></small>
+                </div>
+
+        </fieldset>
+
+        <div class="form-check">
+            
+            {{form.remember(class="form-check-input")}}
+            <span>{{form.remember.label(class="form-check-label")}}</span>   
+            
+        </div>
+
+        <div class="form-group" style="text-align: center;">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+<div class="border-top pt-3" style="text-align: center; padding: 3PX;">
+    <small class="text-muted">
+        Need an account? <a href="/register" class="ml-2">Sign Up </a>
+    </small>
+</div>
+
+</div>
+{% endblock %}
