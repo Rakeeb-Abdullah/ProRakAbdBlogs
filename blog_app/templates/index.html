@@ -25,14 +25,12 @@
       <div class="container" style="max-height: 500px;">
         <img src="{{ images[loop.index] }}" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-caption">
-        <h3><a style="color: white;" href="posts/read_more/{{post.id}}">{{ post.title }}</a></h3>
-        <p>By <a style="color: white;" href="{{ url_for('users.user_posts',username=post.author.username) }}">{{post.author.username}}</a> On {{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+      <div class="carousel-caption d-md-block">
+        <h4><a style="color: white;" href="posts/read_more/{{post.id}}">{{ post.title }}</a></h4>
+        <small>By <a style="color: white;" href="{{ url_for('users.user_posts',username=post.author.username) }}">{{post.author.username}}</a> On {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
         <div style="mix-blend-mode: difference;">
-          <b><a href="posts/read_more/{{post.id}}">Read More</a></b><br><br>
+          <b><a class="btn btn-info btn-sm" href="posts/read_more/{{post.id}}">Read More</a></b><br><br>
         </div>
-        <a class="btn btn-info" href="/posts">See More Posts</a><br>
-        <small class="text-muted">*images may not be suitable to the topics</small>
       </div>
     </div>
     {% endfor %}
@@ -40,8 +38,8 @@
       <div class="container" style="max-height: 500px;">
         <img src="{{ images[0] }}" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-caption">
-        <h3>See More Posts</h3>
+      <div class="carousel-caption d-md-block">
+        <h4>See More Posts</h4>
         <a class="btn btn-info" href="/posts">See More Posts</a>
       </div>
     </div>
@@ -50,9 +48,9 @@
       <div class="container" style="max-height: 500px;">
         <img src="https://images.unsplash.com/photo-1518674660708-0e2c0473e68e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-caption">
-        <h3>Sign Up Today and Start Writing Today</h3>
-        <div class="btn-group">
+      <div class="carousel-caption d-md-block">
+        <h4>Sign Up Today and Start Writing Today</h4>
+        <div class="btn-group btn-group-sm">
           <a type="button" href="{{ url_for('posts.new_post') }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> New Post</a>
           <a type="button" href="{{ url_for('users.register') }}" class="btn btn-info"><i class="fas fa-user-plus"></i> Sign Up</a>
           <a type="button" href="{{ url_for('users.login') }}" class="btn btn-success my-2 my-sm-0"><i class="fas fa-sign-in-alt"></i> Log In</a>
