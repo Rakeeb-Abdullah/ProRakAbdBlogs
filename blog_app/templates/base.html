@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for( 'static',filename='css/bootstrap.css' ) }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/2259b3dc5d.js" crossorigin="anonymous"></script>
-            
+
     {% block head %} {% endblock %}
 </head>
 
@@ -19,7 +19,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -71,7 +71,7 @@
           {% endfor %}
         {% endif %}
       {% endwith %}
-        {% block body %} 
+        {% block body %}
         {% endblock %}
     </div>
 
