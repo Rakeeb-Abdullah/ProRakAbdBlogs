@@ -3,4 +3,8 @@ env/
 secret_key.txt
 __pycache__/
 .env
+<<<<<<< HEAD
 ./blog_app/posts.db
+=======
+./blog_app/posts.db
+>>>>>>> 9861dbeabd6f3d73738b09a940d1b52e6c7e9809
