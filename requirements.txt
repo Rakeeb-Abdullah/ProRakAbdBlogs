@@ -30,5 +30,5 @@ stevedore==3.2.0
 virtualenv==20.0.27
 virtualenv-clone==0.5.4
 virtualenvwrapper==4.8.4
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 WTForms==2.3.1
